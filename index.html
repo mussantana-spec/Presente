@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Um presente pra você ❤️</title>
+
+  <!-- Favicon (ícone do coração com band-aid) -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Link para o CSS externo -->
+  <link rel="stylesheet" href="estilo.css" />
+
+</head>
+<body>
+
+  <!-- Música de fundo -->
+  <audio id="bg-music" src="musica.mp3" autoplay loop controls style="display: none;"></audio>
+
+  <!-- Corações animados -->
+  <script>
+    function criarCoracao() {
+      const coracao = document.createElement('div');
+      coracao.classList.add('heart');
+      coracao.style.left = Math.random() * 100 + "vw";
+      coracao.style.animationDuration = (Math.random() * 2 + 3) + "s";
+      coracao.textContent = "❤️";
+      document.body.appendChild(coracao);
+      setTimeout(() => {
+        coracao.remove();
+      }, 5000);
+    }
+    setInterval(criarCoracao, 300);
+  </script>
+
+  <!-- Menu inicial -->
+  <div class="menu" id="menu">
+    <h2>Um presente que eu fiz com carinho 🎁</h2>
+    <button class="btn" onclick="mostrarCarta()">Ler a cartinha ❤️</button>
+    <button class="btn" onclick="mostrarLista()">O que eu adoro em você 💙</button>
+  </div>
+
+  <!-- Carta -->
+  <div class="carta-container" id="carta">
+    <div class="texto">
+      <h2>Carta pra você 💌</h2>
+      <p>
+        Oi, vida. Nunca pensei que um dia ia escrever uma cartinha...</h2>
+      <p>
+        Bom, você sabe que eu não sou muito bom em falar sobre sentimentos e tal. Sei que já fiz algumas coisas que não deveriam ter acontecido… Você me falou que te fiz chorar, e isso me deixa mal toda vez que lembro. Sei que às vezes me perco, te dei uns foras no domingo, e isso acabou refletindo na segunda. Às vezes eu penso que não tô sendo bom o suficiente pra você e que eu deveria ser muito mais fofo, mais presente.
+      </p>
+      <p>
+        Quando você falou que viria pra SP, eu fiquei tão feliz! Porque eu adoro falar com você, brincar com você, jogar, ver filme… Queria que isso acontecesse todos os dias, com a gente juntinho. Mas aí sempre vem aquele pensamento: “Será que eu tô sendo bom com ela?”. Sei que meu ciúme às vezes passa do ponto, e eu realmente preciso melhorar isso.
+      </p>
+      <p>
+        Como eu já te falei, gosto muito da nossa vibe. E morro de medo de perder isso por causa das minhas inseguranças ou por coisas do passado, que você já conhece.
+      </p>
+      <p>
+        Então, queria te dizer de coração: eu te adoro. Você é uma mulher surreal. Nunca mude esse seu jeitinho, porque ele já me salvou em momentos que eu pensei em largar tudo. Lembro até hoje daquela conversa nossa lá na Santa, quando falei que ia desistir de tudo, e você me disse pra não fazer isso. Você sempre esteve do meu lado — quando eu desisti da pasta, quando quis sair da Santa… em tudo.
+      </p>
+      <p>
+        Às vezes eu sinto que falhei com você. Mas todo dia eu tento te mostrar o quanto gosto de você. Sei que a gente se perde um pouco nas brincadeiras, mas posso te dizer que, depois de 2 anos, você é a primeira menina que me faz rir e sentir aquele frio na barriga de novo. Às vezes eu nem entendo o que tô sentindo, fico quieto só pensando se tudo isso é real, se você é real. Acho que vou descobrir mesmo na sexta, né?
+      </p>
+      <p>
+        Lorenna Silva Tavares da Cruz, obrigado por ser essa menina incrível, e por ser tão paciente comigo. De coração, piquena... Te adoro demais. Você não tem noção — e nem vai ter tão cedo kkkkk.
+      </p>
+      <p>Ah, e tem mais uma coisa: seus sogros te mandaram um oi ❤</p>
+    </div>
+    <br>
+    <button onclick="voltarMenu()">⬅️ Voltar</button>
+  </div>
+
+  <!-- Lista de coisas que adoro -->
+  <div class="lista-container" id="lista">
+    <div class="texto">
+      <h2>Coisas que eu amo em você 💙</h2>
+      <ul>
+        <li>Seu jeitinho carinhoso</li>
+        <li>Seu sorriso (me desmonta)</li>
+        <li>O jeito que você fala "piqueno"</li>
+        <li>Como você me apoia mesmo nos momentos ruins</li>
+        <li>Como você cuida de mim mesmo de longe</li>
+        <li>Seu jeitinho bobo e engraçado</li>
+        <li>Seu cheiro, mesmo quando só imagino</li>
+        <li>O jeito que você segura minha mão (mesmo virtualmente)</li>
+        <li>Como me faz sentir importante</li>
+        <li>Tudo em você!</li>
+      </ul>
+    </div>
+    <br>
+    <button onclick="voltarMenu()">⬅️ Voltar</button>
+  </div>
+
+  <!-- Funções JS -->
+  <script>
+    function mostrarCarta() {
+      document.getElementById('menu').style.display = 'none';
+      document.getElementById('carta').style.display = 'flex';
+      document.getElementById('bg-music').play();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function mostrarLista() {
+      document.getElementById('menu').style.display = 'none';
+      document.getElementById('lista').style.display = 'flex';
+      document.getElementById('bg-music').play();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function voltarMenu() {
+      document.getElementById('carta').style.display = 'none';
+      document.getElementById('lista').style.display = 'none';
+      document.getElementById('menu').style.display = 'flex';
+      document.getElementById('bg-music').pause();
+      document.getElementById('bg-music').currentTime = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
