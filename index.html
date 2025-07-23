@@ -14,6 +14,7 @@
       background-color: white;
       overflow-x: hidden;
       text-align: center;
+      position: relative;
     }
 
     #intro-text {
@@ -68,7 +69,7 @@
       background-color: #6ca0dc; /* azul mais escuro */
     }
 
-    .carta-container, .lista-container, .desculpa-container {
+    .carta-container, .lista-container, .desculpa-container, .cronograma-container {
       display: none;
       flex-direction: column;
       align-items: center;
@@ -76,6 +77,8 @@
       max-width: 800px;
       margin: 0 auto 40px auto;
       text-align: justify;
+      position: relative;
+      z-index: 10;
     }
 
     .texto {
@@ -101,6 +104,7 @@
       animation: cair 5s linear infinite;
       user-select: none;
       pointer-events: none;
+      z-index: 5;
     }
 
     @keyframes cair {
@@ -109,27 +113,77 @@
         opacity: 0;
       }
     }
+
+    /* Estilo específico para o cronograma */
+    .cronograma-container {
+      background-color: #666666; /* cinza escuro */
+      color: white;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 40px auto;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: justify;
+      position: relative;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
 
   <div id="intro-text">
-    Esse é um presente especial para você, pequina. Contando os segundos para nosso encontro.
+    Esse é um presente especial para você, piquena. Contando os segundos para nosso encontro.
   </div>
 
   <div id="timer">Contagem regressiva: --:--:--:--</div>
 
-  <audio id="bg-music" src="musica.mp3" autoplay loop controls style="display: none;"></audio>
+  <!-- Música com autoplay e muted para garantir que comece -->
+  <audio id="bg-music" src="musica.mp3" autoplay muted loop></audio>
+
   <script>
     const musica = document.getElementById("bg-music");
     musica.volume = 0.05;
+
+    musica.addEventListener('canplay', () => {
+      if(musica.muted) {
+        const playPromise = musica.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            musica.muted = false;
+          }).catch(() => {
+            musica.muted = true;
+          });
+        } else {
+          musica.muted = false;
+        }
+      }
+    });
   </script>
 
   <script>
     function criarCoracao() {
+      const cronograma = document.getElementById('cronograma');
+      const cronogramaRect = cronograma.getBoundingClientRect();
+
+      const cronogramaLeft = cronogramaRect.left;
+      const cronogramaRight = cronogramaRect.right;
+      const viewportHeight = window.innerHeight;
+
+      const leftPos = Math.random() * 100; // vw
+      const vwToPx = window.innerWidth / 100;
+      const leftPosPx = leftPos * vwToPx;
+
+      // Evitar criar corações dentro da área horizontal do cronograma se ele estiver visível
+      if (cronogramaRect.top < viewportHeight) {
+        if (leftPosPx >= cronogramaLeft && leftPosPx <= cronogramaRight) {
+          return; // não cria coração nessa posição
+        }
+      }
+
       const coracao = document.createElement('div');
       coracao.classList.add('heart');
-      coracao.style.left = Math.random() * 100 + "vw";
+      coracao.style.left = leftPos + "vw";
       coracao.style.animationDuration = (Math.random() * 2 + 3) + "s";
       coracao.textContent = "❤️";
       document.body.appendChild(coracao);
@@ -142,6 +196,7 @@
     <button class="btn btn-azul" onclick="mostrarCarta()">Ler a cartinha ❤️</button>
     <button class="btn btn-azul" onclick="mostrarLista()">O que eu adoro em você 💙</button>
     <button class="btn btn-azul" onclick="mostrarDesculpas()">Pedido de Desculpas 💌</button>
+    <button class="btn btn-azul" onclick="mostrarCronograma()">Cronograma 🗺️</button>
   </div>
 
   <div class="carta-container" id="carta">
@@ -177,27 +232,55 @@
         <li>Como você me ajuda mesmo nos momentos ruins</li>
         <li>Quando você fica fazendo graça quando estou bravo</li>
         <li>Seu jeitinho de engraçadinha</li>
-        <li>Quando vc liga a camera de amanhã</li>
-        <li>Quando vc fica com ciumes</li>
+        <li>Quando vc liga a câmera de manhã</li>
+        <li>Quando vc fica com ciúmes</li>
         <li>Como me faz sentir importante</li>
         <li>Tudo em você!</li>
       </ul>
     </div>
     <br>
-    <div>
-      <button class="btn" onclick="voltarMenu()"> Voltar</button>
-    </div>
+    <button class="btn" onclick="voltarMenu()">⬅️ Voltar</button>
   </div>
 
   <div class="desculpa-container" id="desculpa">
     <div class="texto texto-vermelho">
-      <h2>Pedido de desculpas 💌</h2>
+      <h2>Pedido de Desculpas 💌</h2>
       <p>Sim, eu já escrevi dois textos, mas tem tanta coisa que eu ainda quero te dizer… só que não sei bem como.</p>
       <p>Esses meses que a gente vem conversando têm sido incríveis. Eu sei que a gente passou por um momento difícil, que acabamos nos afastando por um tempo, e eu me arrependo muito disso — você sabe o quanto, porque já conversamos sobre.</p>
       <p>Sinto que a gente tem algo especial, algo legal mesmo. Mas ao mesmo tempo, meus sentimentos — essa vontade de estar mais com você, de conversar mais sobre “a gente” — acabam me deixando com medo. Às vezes, quando estamos em ligação só nós dois, eu fico quieto… não é porque falta assunto, é porque tenho medo de falar alguma besteira e acabar estragando tudo. Então eu me calo.</p>
       <p>Também queria te pedir desculpas por ficar insistindo naquele negócio da CDL, e por certas coisas de ciúmes… é que eu não sei direito como explicar o que eu sinto. Essa semana, de 21 a 25, eu fiquei com muita vontade de estar em call com você. Talvez porque eu ainda nem estou acreditando que vou te ver, então quero aproveitar cada pedacinho, sabe? Ficar mais com você de algum jeito.</p>
       <p>No fim das contas, o que eu queria mesmo dizer é que eu gosto muito dos nossos momentos. E sim, eu vou correr atrás pra que, no futuro, a gente possa ter algo de verdade.</p>
       <p>Ah, e desculpa mais uma vez pelo negócio do TikTok. Sempre que penso nisso, me vem aquele sentimento de que quase estraguei tudo de novo… Mas o site, tudo isso, é só uma parte pequena comparado com tudo que eu quero te dar.</p>
+    </div>
+    <br>
+    <button class="btn" onclick="voltarMenu()">⬅️ Voltar</button>
+  </div>
+
+  <div class="cronograma-container" id="cronograma">
+    <div class="texto">
+      <h2>Cronograma 🗺️</h2>
+      <h3>📅 Sexta-feira (25)</h3>
+      <ul>
+        <li>🍰 Fazer o bolo</li>
+        <li>🎬 Ver um filme</li>
+        <li>🥋 Aula ou treino de capoeira</li>
+      </ul>
+
+      <h3>📅 Sábado (26)</h3>
+      <ul>
+        <li>🦁 Visitar o Zoológico</li>
+        <li>🦆 Passeio no Lago dos Patos</li>
+        <li>🏛 Museu Catavento</li>
+        <li>🛍 Shopping (opcional para lanche ou passeio)</li>
+      </ul>
+
+      <h3>📅 Domingo (27)</h3>
+      <ul>
+        <li>🏮 Bairro da Liberdade</li>
+        <li>🍔 McDonald's Mequi 1000</li>
+        <li>🌳 Bosque Maia</li>
+        <li>🎤 Karaokê</li>
+      </ul>
     </div>
     <br>
     <button class="btn" onclick="voltarMenu()">⬅️ Voltar</button>
@@ -231,29 +314,30 @@
     function mostrarCarta() {
       esconderTudo();
       document.getElementById('carta').style.display = 'flex';
-      musica.play();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function mostrarLista() {
       esconderTudo();
       document.getElementById('lista').style.display = 'flex';
-      musica.play();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function mostrarDesculpas() {
       esconderTudo();
       document.getElementById('desculpa').style.display = 'flex';
-      musica.play();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function mostrarCronograma() {
+      esconderTudo();
+      document.getElementById('cronograma').style.display = 'flex';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function voltarMenu() {
       esconderTudo();
       document.getElementById('menu').style.display = 'flex';
-      musica.pause();
-      musica.currentTime = 0;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -261,6 +345,7 @@
       document.getElementById('carta').style.display = 'none';
       document.getElementById('lista').style.display = 'none';
       document.getElementById('desculpa').style.display = 'none';
+      document.getElementById('cronograma').style.display = 'none';
       document.getElementById('menu').style.display = 'none';
     }
   </script>
