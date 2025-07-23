@@ -3,28 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Um presente pra você ❤️</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="stylesheet" href="estilo.css" />
-  
+  <title>Surpresa ❤️</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
   <style>
-    #desculpas {
-      display: none;
-      margin-top: 30px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      line-height: 1.6;
-      white-space: pre-line;
+    body {
+      background: linear-gradient(to bottom right, #ffe6e6, #ffccd5);
       font-family: Arial, sans-serif;
-      text-align: left;
-      color: #d8000c; /* vermelho suave e emocional */
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+      text-align: center;
     }
 
     .btn {
@@ -42,153 +37,189 @@
     .btn:hover {
       background-color: #ff4d6d;
     }
+
+    .carta-container,
+    .lista-container,
+    #desculpas {
+      display: none;
+      flex-direction: column;
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .texto {
+      white-space: pre-line;
+      color: #333;
+    }
+
+    #desculpas {
+      color: #d8000c;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: float 4s linear infinite;
+      top: 100%;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Música -->
-  <audio id="bg-music" src="musica.mp3" autoplay loop controls style="display: none;"></audio>
-  <script>
-    const musica = document.getElementById("bg-music");
-    musica.volume = 0.05;
-  </script>
+  <audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
 
-  <!-- Corações -->
-  <script>
-    function criarCoracao() {
-      const coracao = document.createElement('div');
-      coracao.classList.add('heart');
-      coracao.style.left = Math.random() * 100 + "vw";
-      coracao.style.animationDuration = (Math.random() * 2 + 3) + "s";
-      coracao.textContent = "❤️";
-      document.body.appendChild(coracao);
-      setTimeout(() => {
-        coracao.remove();
-      }, 5000);
-    }
-    setInterval(criarCoracao, 300);
-  </script>
-
-  <!-- Menu inicial -->
   <div class="menu" id="menu">
-    <h2>Um presente que eu fiz com carinho 🎁</h2>
-    <button class="btn" onclick="mostrarCarta()">Ler a cartinha ❤️</button>
-    <button class="btn" onclick="mostrarLista()">O que eu adoro em você 💙</button>
-    <button class="btn" onclick="mostrarDesculpas()">Pedido de Desculpas 💔</button>
+    <h1>Oi, piquena ❤️</h1>
+    <p>Preparei uma coisinha especial pra você…</p>
+    <button class="btn" onclick="mostrarCarta()">📩 Carta pra você</button>
+    <button class="btn" onclick="mostrarLista()">💖 Coisas que amo em você</button>
+    <button class="btn" onclick="mostrarDesculpas()">💬 Pedido de Desculpas</button>
   </div>
 
-  <!-- Carta -->
   <div class="carta-container" id="carta">
     <div class="texto">
       <h2>Carta pra você 💌</h2>
-      <p>
-        Oi, vida. Nunca pensei que um dia ia escrever uma cartinha...
-      </p>
-      <p>
-        Bom, você sabe que eu não sou muito bom em falar sobre sentimentos e tal. Sei que já fiz algumas coisas que não deveriam ter acontecido… Você me falou que te fiz chorar, e isso me deixa mal toda vez que lembro. Sei que às vezes me perco, te dei uns foras no domingo, e isso acabou refletindo na segunda. Às vezes eu penso que não tô sendo bom o suficiente pra você e que eu deveria ser muito mais fofo, mais presente.
-      </p>
-      <p>
-        Quando você falou que viria pra SP, eu fiquei tão feliz! Porque eu adoro falar com você, brincar com você, jogar, ver filme… Queria que isso acontecesse todos os dias, com a gente juntinho. Mas aí sempre vem aquele pensamento: “Será que eu tô sendo bom com ela?”. Sei que meu ciúme às vezes passa do ponto, e eu realmente preciso melhorar isso.
-      </p>
-      <p>
-        Como eu já te falei, gosto muito da nossa vibe. E morro de medo de perder isso por causa das minhas inseguranças ou por coisas do passado, que você já conhece.
-      </p>
-      <p>
-        Então, queria te dizer de coração: eu te adoro. Você é uma mulher surreal. Nunca mude esse seu jeitinho, porque ele já me salvou em momentos que eu pensei em largar tudo. Lembro até hoje daquela conversa nossa lá na Santa, quando falei que ia desistir de tudo, e você me disse pra não fazer isso. Você sempre esteve do meu lado — quando eu desisti da pasta, quando quis sair da Santa… em tudo.
-      </p>
-      <p>
-        Às vezes eu sinto que falhei com você. Mas todo dia eu tento te mostrar o quanto gosto de você. Sei que a gente se perde um pouco nas brincadeiras, mas posso te dizer que, depois de 2 anos, você é a primeira menina que me faz rir e sentir aquele frio na barriga de novo. Às vezes eu nem entendo o que tô sentindo, fico quieto só pensando se tudo isso é real, se você é real. Acho que vou descobrir mesmo na sexta, né?
-      </p>
-      <p>
-        Lorenna Silva Tavares da Cruz, obrigado por ser essa menina incrível, e por ser tão paciente comigo. De coração, piquena... Te adoro demais. Você não tem noção — e nem vai ter tão cedo kkkkk.
-      </p>
+      <p>Oi, vida. Nunca pensei que um dia ia escrever uma cartinha...</p>
+
+      <p>Bom, você sabe que eu não sou muito bom em falar sobre sentimentos e tal. Sei que já fiz algumas coisas que não deveriam ter acontecido… Você me falou que te fiz chorar, e isso me deixa mal toda vez que lembro. Sei que às vezes me perco, te dei uns foras no domingo, e isso acabou refletindo na segunda. Às vezes eu penso que não tô sendo bom o suficiente pra você e que eu deveria ser muito mais fofo, mais presente.</p>
+
+      <p>Quando você falou que viria pra SP, eu fiquei tão feliz! Porque eu adoro falar com você, brincar com você, jogar, ver filme… Queria que isso acontecesse todos os dias, com a gente juntinho. Mas aí sempre vem aquele pensamento: “Será que eu tô sendo bom com ela?”. Sei que meu ciúme às vezes passa do ponto, e eu realmente preciso melhorar isso.</p>
+
+      <p>Como eu já te falei, gosto muito da nossa vibe. E morro de medo de perder isso por causa das minhas inseguranças ou por coisas do passado, que você já conhece.</p>
+
+      <p>Então, queria te dizer de coração: eu te adoro. Você é uma mulher surreal. Nunca mude esse seu jeitinho, porque ele já me salvou em momentos que eu pensei em largar tudo. Lembro até hoje daquela conversa nossa lá na Santa, quando falei que ia desistir de tudo, e você me disse pra não fazer isso. Você sempre esteve do meu lado — quando eu desisti da pasta, quando quis sair da Santa… em tudo.</p>
+
+      <p>Às vezes eu sinto que falhei com você. Mas todo dia eu tento te mostrar o quanto gosto de você. Sei que a gente se perde um pouco nas brincadeiras, mas posso te dizer que, depois de 2 anos, você é a primeira menina que me faz rir e sentir aquele frio na barriga de novo. Às vezes eu nem entendo o que tô sentindo, fico quieto só pensando se tudo isso é real, se você é real. Acho que vou descobrir mesmo na sexta, né?</p>
+
+      <p>Lorenna Silva Tavares da Cruz, obrigado por ser essa menina incrível, e por ser tão paciente comigo. De coração, piquena... Te adoro demais. Você não tem noção — e nem vai ter tão cedo kkkkk.</p>
+
       <p>Ah, e tem mais uma coisa: seus sogros te mandaram um oi ❤</p>
     </div>
     <br>
-    <button onclick="voltarMenu()">⬅️ Voltar</button>
+    <button class="btn" onclick="voltarMenu()">⬅️ Voltar</button>
   </div>
 
-  <!-- Lista de coisas que adoro -->
   <div class="lista-container" id="lista">
     <div class="texto">
-      <h2>Coisas que eu adoro em você ❤️</h2>
+      <h2>Coisas que amo em você 💖</h2>
       <ul>
-        <li>Seu jeitinho carinhoso as vezes</li>
-        <li>Seu sorriso (me desmonta)</li>
-        <li>quando você faz voz de neném</li>
-        <li>Como você me ajuda mesmo nos momentos ruins</li>
-        <li>Quando você fica fazendo graça quando estou bravo</li>
-        <li>Seu jeitinho de engraçadinha</li>
-        <li>Quando vc liga a camera de amanhã</li>
-        <li>Quando vc fica com ciumes</li>
-        <li>Como me faz sentir importante</li>
-        <li>Tudo em você!</li>
+        <li>Seu jeitinho carinhoso</li>
+        <li>Seu sorriso que ilumina tudo</li>
+        <li>O jeito que você me escuta</li>
+        <li>As nossas risadas juntos</li>
+        <li>Quando você me chama de "piqueno" 🥹</li>
+        <li>Seu abraço (que tô doido pra ganhar!)</li>
+        <li>Seu jeito bobo e fofo ao mesmo tempo</li>
+        <li>Seu cuidado comigo</li>
+        <li>Seu olhar sincero</li>
+        <li>O fato de você ser... você. Perfeita pra mim ❤️</li>
       </ul>
     </div>
     <br>
-    <div>
-      <button onclick="voltarMenu()">⬅️ Voltar</button>
-    </div>
+    <button class="btn" onclick="voltarMenu()">⬅️ Voltar</button>
   </div>
 
-  <!-- Pedido de Desculpas -->
   <div id="desculpas">
-    <h2>Pedido de Desculpas 💔</h2>
+    <h2>Pedido de Desculpas 🥺</h2>
     <p>
-Sim, eu já escrevi dois textos, mas tem tanta coisa que eu ainda quero te dizer… só que não sei bem como.
+      Sim, eu já escrevi dois textos, mas tem tanta coisa que eu ainda quero te dizer… só que não sei bem como.
 
-Esses meses que a gente vem conversando têm sido incríveis. Eu sei que a gente passou por um momento difícil, que acabamos nos afastando por um tempo, e eu me arrependo muito disso — você sabe o quanto, porque já conversamos sobre.
+      Esses meses que a gente vem conversando têm sido incríveis. Eu sei que a gente passou por um momento difícil, que acabamos nos afastando por um tempo, e eu me arrependo muito disso — você sabe o quanto, porque já conversamos sobre.
 
-Sinto que a gente tem algo especial, algo legal mesmo. Mas ao mesmo tempo, meus sentimentos — essa vontade de estar mais com você, de conversar mais sobre “a gente” — acabam me deixando com medo. Às vezes, quando estamos em ligação só nós dois, eu fico quieto… não é porque falta assunto, é porque tenho medo de falar alguma besteira e acabar estragando tudo. Então eu me calo.
+      Sinto que a gente tem algo especial, algo legal mesmo. Mas ao mesmo tempo, meus sentimentos — essa vontade de estar mais com você, de conversar mais sobre “a gente” — acabam me deixando com medo. Às vezes, quando estamos em ligação só nós dois, eu fico quieto… não é porque falta assunto, é porque tenho medo de falar alguma besteira e acabar estragando tudo. Então eu me calo.
 
-Também queria te pedir desculpas por ficar insistindo naquele negócio da CDL, e por certas coisas de ciúmes… é que eu não sei direito como explicar o que eu sinto. Essa semana, de 21 a 25, eu fiquei com muita vontade de estar em call com você. Talvez porque eu ainda nem estou acreditando que vou te ver, então quero aproveitar cada pedacinho, sabe? Ficar mais com você de algum jeito.
+      Também queria te pedir desculpas por ficar insistindo naquele negócio da CDL, e por certas coisas de ciúmes… é que eu não sei direito como explicar o que eu sinto. Essa semana, de 21 a 25, eu fiquei com muita vontade de estar em call com você. Talvez porque eu ainda nem estou acreditando que vou te ver, então quero aproveitar cada pedacinho, sabe? Ficar mais com você de algum jeito.
 
-No fim das contas, o que eu queria mesmo dizer é que eu gosto muito dos nossos momentos. E sim, eu vou correr atrás pra que, no futuro, a gente possa ter algo de verdade.
+      No fim das contas, o que eu queria mesmo dizer é que eu gosto muito dos nossos momentos. E sim, eu vou correr atrás pra que, no futuro, a gente possa ter algo de verdade.
 
-Ah, e desculpa mais uma vez pelo negócio do TikTok. Sempre que penso nisso, me vem aquele sentimento de que quase estraguei tudo de novo… Mas o site, tudo isso, é só uma parte pequena comparado com tudo que eu quero te dar.
+      Ah, e desculpa mais uma vez pelo negócio do TikTok. Sempre que penso nisso, me vem aquele sentimento de que quase estraguei tudo de novo… Mas o site, tudo isso, é só uma parte pequena comparado com tudo que eu quero te dar.
     </p>
     <br>
     <button class="btn" onclick="voltarMenu()">⬅️ Voltar</button>
   </div>
 
-  <!-- Funções -->
   <script>
     function mostrarCarta() {
-      esconderTudo();
-      document.getElementById('carta').style.display = 'flex';
-      document.getElementById('bg-music').play();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("carta").style.display = "flex";
     }
 
     function mostrarLista() {
-      esconderTudo();
-      document.getElementById('lista').style.display = 'flex';
-      document.getElementById('bg-music').play();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("lista").style.display = "flex";
     }
 
     function mostrarDesculpas() {
-      esconderTudo();
-      document.getElementById('desculpas').style.display = 'block';
-      document.getElementById('bg-music').play();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("desculpas").style.display = "flex";
     }
 
     function voltarMenu() {
-      esconderTudo();
-      document.getElementById('menu').style.display = 'flex';
-      document.getElementById('bg-music').pause();
-      document.getElementById('bg-music').currentTime = 0;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById("carta").style.display = "none";
+      document.getElementById("lista").style.display = "none";
+      document.getElementById("desculpas").style.display = "none";
+      document.getElementById("menu").style.display = "flex";
     }
 
-    function esconderTudo() {
-      document.getElementById('menu').style.display = 'none';
-      document.getElementById('carta').style.display = 'none';
-      document.getElementById('lista').style.display = 'none';
-      document.getElementById('desculpas').style.display = 'none';
+    function criarCoraçao() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
     }
+
+    setInterval(criarCoraçao, 300);
   </script>
-
 </body>
 </html>
