@@ -10,12 +10,17 @@
 
   <!-- Link para o CSS externo -->
   <link rel="stylesheet" href="estilo.css" />
-
 </head>
 <body>
 
   <!-- Música de fundo -->
   <audio id="bg-music" src="musica.mp3" autoplay loop controls style="display: none;"></audio>
+
+  <!-- Volume baixo da música -->
+  <script>
+    const musica = document.getElementById("bg-music");
+    musica.volume = 0.05; // volume mínimo
+  </script>
 
   <!-- Corações animados -->
   <script>
@@ -45,7 +50,8 @@
     <div class="texto">
       <h2>Carta pra você 💌</h2>
       <p>
-        Oi, vida. Nunca pensei que um dia ia escrever uma cartinha...</h2>
+        Oi, vida. Nunca pensei que um dia ia escrever uma cartinha...
+      </p>
       <p>
         Bom, você sabe que eu não sou muito bom em falar sobre sentimentos e tal. Sei que já fiz algumas coisas que não deveriam ter acontecido… Você me falou que te fiz chorar, e isso me deixa mal toda vez que lembro. Sei que às vezes me perco, te dei uns foras no domingo, e isso acabou refletindo na segunda. Às vezes eu penso que não tô sendo bom o suficiente pra você e que eu deveria ser muito mais fofo, mais presente.
       </p>
@@ -73,7 +79,7 @@
   <!-- Lista de coisas que adoro -->
   <div class="lista-container" id="lista">
     <div class="texto">
-      <h2>Coisas que eu adoro em você 💙</h2>
+      <h2>Coisas que eu gosto em você 💙</h2>
       <ul>
         <li>Seu jeitinho carinhoso</li>
         <li>Seu sorriso (me desmonta)</li>
