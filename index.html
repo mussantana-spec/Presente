@@ -58,7 +58,7 @@
       font-size: 16px;
       border-radius: 8px;
       border: none;
-      background-color: #a3d2f2; /* azul bebê */
+      background-color: #a3d2f2;
       color: white;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -66,7 +66,7 @@
     }
 
     .btn:hover {
-      background-color: #6ca0dc; /* azul mais escuro */
+      background-color: #6ca0dc;
     }
 
     .carta-container, .lista-container, .desculpa-container, .cronograma-container {
@@ -114,9 +114,8 @@
       }
     }
 
-    /* Estilo específico para o cronograma */
     .cronograma-container {
-      background-color: #666666; /* cinza escuro */
+      background-color: #666666;
       color: white;
       border-radius: 12px;
       width: 100%;
@@ -138,7 +137,6 @@
 
   <div id="timer">Contagem regressiva: --:--:--:--</div>
 
-  <!-- Música com autoplay e muted para garantir que comece -->
   <audio id="bg-music" src="musica.mp3" autoplay muted loop></audio>
 
   <script>
@@ -170,14 +168,13 @@
       const cronogramaRight = cronogramaRect.right;
       const viewportHeight = window.innerHeight;
 
-      const leftPos = Math.random() * 100; // vw
+      const leftPos = Math.random() * 100;
       const vwToPx = window.innerWidth / 100;
       const leftPosPx = leftPos * vwToPx;
 
-      // Evitar criar corações dentro da área horizontal do cronograma se ele estiver visível
       if (cronogramaRect.top < viewportHeight) {
         if (leftPosPx >= cronogramaLeft && leftPosPx <= cronogramaRight) {
-          return; // não cria coração nessa posição
+          return;
         }
       }
 
@@ -185,7 +182,7 @@
       coracao.classList.add('heart');
       coracao.style.left = leftPos + "vw";
       coracao.style.animationDuration = (Math.random() * 2 + 3) + "s";
-      coracao.textContent = "❤️";
+      coracao.textContent = "💙"; // coração azul
       document.body.appendChild(coracao);
       setTimeout(() => coracao.remove(), 5000);
     }
@@ -286,7 +283,7 @@
     <button class="btn" onclick="voltarMenu()">⬅️ Voltar</button>
   </div>
 
-  <script>
+   <script>
     function atualizarTimer() {
       const agora = new Date();
       const anoAtual = agora.getFullYear();
@@ -294,7 +291,7 @@
       const diff = dataAlvo - agora;
 
       if(diff <= 0) {
-        document.getElementById('timer').textContent = "O momento chegou! ❤️";
+        document.getElementById('timer').textContent = "O momento chegou! 💙";
         clearInterval(timerInterval);
         return;
       }
